@@ -12,7 +12,7 @@ import (
 	"os"
 )
 
-var palette []color.Color //{color.Black, color.RGBA{R: 0x00, G: 0xff, B: 0x00, A: 0xff}}
+var palette []color.Color
 
 const (
 	paletteSize   = 100
