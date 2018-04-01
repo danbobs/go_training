@@ -9,10 +9,9 @@ import (
 	"strings"
 )
 
-var counts map[string]int
-
 func main() {
-	counts = make(map[string]int)
+
+	counts := make(map[string]int)
 
 	files := os.Args[1:]
 	if len(files) == 0 {
@@ -25,22 +24,22 @@ func main() {
 			fmt.Fprintf(os.Stderr, "dup2: %v", err)
 		} else {
 			contents := string(bytes)
-			countFileLines(contents)
+			countFileLines(contents, &counts)
 		}
 	}
 
-	printDupes()
+	printDupes(&counts)
 }
 
-func countFileLines(contents string) {
+func countFileLines(contents string, counts *map[string]int) {
 	lines := strings.Split(contents, "\n")
 	for _, line := range lines {
-		counts[line]++
+		(*counts)[line]++
 	}
 }
 
-func printDupes() {
-	for text, count := range counts {
+func printDupes(counts *map[string]int) {
+	for text, count := range *counts {
 		if count > 1 {
 			fmt.Fprintf(os.Stderr, "%s - %d\n", text, count)
 		}
