@@ -3,7 +3,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 )
@@ -15,12 +15,11 @@ func main() {
 			fmt.Fprintf(os.Stdout, "fetch: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Fprintln(os.Stdout, resp.Status)
-		body, err := ioutil.ReadAll(resp.Body)
+		fmt.Println(resp.Status)
+		_, err = io.Copy(os.Stdout, resp.Body)
 		if err != nil {
 			fmt.Fprintf(os.Stdout, "fetch: %v\n", err)
 			os.Exit(1)
 		}
-		fmt.Fprintf(os.Stdout, "%s\n", body)
 	}
 }
