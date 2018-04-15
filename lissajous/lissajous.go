@@ -30,11 +30,16 @@ func createPalette() []color.Color {
 }
 
 func Create(out io.Writer) {
+	CreateWithParams(out, 5)
+}
+
+// Writes a lissajous gif to the specified writer
+func CreateWithParams(out io.Writer, cycles int) {
 	const (
-		cycles  = 5     // number of complete x oscillator revolutions
+		//cycles  = 5     // number of complete x oscillator revolutions
 		res     = 0.001 // angular resolution
 		size    = 100   // image canvas size [-size ... + size]
-		nframes = 64    // animation frames
+		nframes = 64    // animation frames ..
 		delay   = 8     // delay between frames in 10ms units
 	)
 
@@ -48,7 +53,7 @@ func Create(out io.Writer) {
 	for i := 0; i < nframes; i++ {
 		rect := image.Rect(0, 0, 2*size+1, 2*size+1)
 		img := image.NewPaletted(rect, palette)
-		for t := 0.0; t < cycles*2*math.Pi; t += res {
+		for t := 0.0; t < float64(cycles)*2*math.Pi; t += res {
 			x := math.Sin(t)
 			y := math.Sin(t*freq + phase)
 			xPlot := size + int(x*size+0.5)
