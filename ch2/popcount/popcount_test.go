@@ -2,12 +2,11 @@
 package popcount
 
 import (
-	"fmt"
 	"testing"
 )
 
-func BenchmarkSelfConcatOperator1000(b *testing.B) {
+func BenchmarkPopCount(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		fmt.Printf("popcount of %v (%b) is %d\n", n, n, PopCount(uint64(n)))
+		PopCount3(uint64(n))
 	}
 }

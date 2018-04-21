@@ -11,7 +11,8 @@ func init() {
 }
 
 // PopCount returns the population count (the number of set bits) of a uint64
-func PopCount(x uint64) int {
+// Benchmark 1.485s
+func PopCount1(x uint64) int {
 	return int(pc[byte(x>>(0*8))] +
 		pc[byte(x>>(1*8))] +
 		pc[byte(x>>(2*8))] +
@@ -20,4 +21,21 @@ func PopCount(x uint64) int {
 		pc[byte(x>>(5*8))] +
 		pc[byte(x>>(6*8))] +
 		pc[byte(x>>(7*8))])
+}
+
+// Benchmark 1.481s
+func PopCount2(x uint64) int {
+	var total int
+	for i := 0; i < 8; i++ {
+		total += int(pc[byte(x>>uint(i*8))])
+	}
+	return total
+}
+
+func PopCount3(x uint64) int {
+	var total int
+	for i := 0; i < 63; i++ {
+		total += int(1 & (x >> uint(i)))
+	}
+	return total
 }
