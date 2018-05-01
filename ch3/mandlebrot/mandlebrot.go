@@ -36,7 +36,11 @@ func mandlebrot(z complex128) color.Color {
 	for n := uint8(0); n < iterations; n++ {
 		v = v*v + z
 		if cmplx.Abs(v) > 2 {
-			return color.Gray{255 - contrast*n}
+
+			r := 255 - n*contrast/3
+			g := 255 - n*contrast/2
+			b := 20 + n*contrast
+			return color.RGBA{R: r, G: g, B: b, A: 255}
 		}
 	}
 
