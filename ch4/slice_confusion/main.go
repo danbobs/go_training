@@ -7,17 +7,12 @@ import (
 func main() {
 
 	s := []int{1, 2, 3, 4, 5}
-	s2 := s[:]
-	s3 := s[0:2]
+	fmt.Printf("%v %v %v\n", s, len(s), cap(s))
 
-	fmt.Println(s)
-	fmt.Println(s2)
-	fmt.Println(s3)
+	test1 := s[4:]
+	fmt.Printf("%v %v %v\n", test1, len(test1), cap(test1))
 
-	s[1] = 9
-
-	fmt.Println(s)
-	fmt.Println(s2)
-	fmt.Println(s3)
+	test2 := s[5:]
+	fmt.Printf("%v %v %v\n", test2, len(test2), cap(test2))
 
 }
