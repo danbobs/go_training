@@ -1,0 +1,1 @@
+There are words here and digits like 2 and 3 and other chars like % ^ and $.
