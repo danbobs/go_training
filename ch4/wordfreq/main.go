@@ -23,5 +23,4 @@ func main() {
 	for w, c := range counts {
 		fmt.Printf("%s\t%d\n", w, c)
 	}
-
 }
